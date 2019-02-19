@@ -90,7 +90,7 @@
 
 	```python
 	# main_app/urls.py
-	from django.conf.urls import path
+	from django.urls import path
 	from . import views
 
 	urlpatterns = [
@@ -119,33 +119,32 @@
 	- Create a `templates` folder within the `main_app` folder
 
 	- Create an `index.html` file inside your `templates` folder and fill it with some basic html:
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>CatCollectr</title>
+  </head>
+  <body>
+	<h1>CatCollectr</h1>
+	<hr />
+	<footer>All Rights Reserved, CatCollectr 2018</footer>
+  </body>
+ </html>
+```
 
-	```html
-	<!DOCTYPE html>
-	<html>
-	  <head>
-			<title>CatCollectr</title>
-	  </head>
-	  <body>
-      <h1>CatCollectr</h1>
-      <hr />
-      <footer>All Rights Reserved, CatCollectr 2018</footer>
-	  </body>
-  </html>
-	```
+ In our `views.py` we will now be **rendering** our template instead of sending HTTP responses, so so we can update our views.py to only import render from django.shortcuts.  Feel free to delete the line importing HttpResponse.
 
-	- In our `views.py` we will now be **rendering** our template instead of sending HTTP responses, so so we can update our views.py to only import render from django.shortcuts.  Feel free to delete the line importing HttpResponse.
+ Finally, in our index function in our views.py file, lets update the render to show our index.html:
 
-	- Finally, in our index function in our views.py file, lets update the render to show our index.html:
-
-	```python
+```python
 	# main_app/views.py
 	from django.http import HttpResponse
 	from django.shortcuts import render
 
 	def index(request):
 		return render(request, 'index.html')
-	```
+```
 
 1.  In `views.py` lets create a Cat class with all of the attributes we want to see displayed on our index page. We can also create an array of Cat objects to populate our view. Add this code to the bottom of the file.
 
@@ -195,11 +194,11 @@
 	{% for cat in cats %}
 		<p>Name: {{ cat.name }}</p>
 		{% if cat.age > 0 %}
-	    <p>Age: {{ cat.age }}</p>
+	    		<p>Age: {{ cat.age }}</p>
 		{% else %}
-	    <p>Age: Kitten</p>
+	    		<p>Age: Kitten</p>
 		{% endif %}
-		  <hr />
+		 <hr />
 	{% endfor %}
 
 	```
