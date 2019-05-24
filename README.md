@@ -182,8 +182,9 @@
 	{% for cat in cats %}
   	<p>Name: {{ cat.name }}</p>
 		<p>Age: {{ cat.age }}</p>
-    <hr />
-  {% endfor %}
+    	<hr />
+  	{% endfor %}
+	
 	```
 
 	Check out our index file on your browser and you should see our cats displayed on the screen!
@@ -211,7 +212,7 @@
 
 	```css
 	h1 {
-		color: turquoise;
+		color: hotpink;
 	}
 	```
 
@@ -267,7 +268,7 @@ You should now have a boring but completely functional application that will pul
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': ('cats'),
+        'NAME': 'cats',
     }
 }
 ```
@@ -277,13 +278,16 @@ Good! Oh, and importantly, we must create our db in the terminal with psql by ru
 createdb cats
 ```
 
-Okay now prepare to migrate:
+#### Migrating
 
-- Enter the following into your terminal:
+If you haven't already installed the Postgres driver for Django (psychopg2),
+enter the following into your terminal:
 ```bash
 pip3 install psycopg2
 ```
-This will install the Postgres driver for Django.
+> Fromt the docs: "Psycopg is the most popular PostgreSQL adapter for the Python programming language. At its core it fully implements the Python DB API 2.0 specifications."
+
+Okay now prepare to migrate:
 
 ```bash
 python3 manage.py makemigrations
@@ -295,7 +299,8 @@ This will prepare a file to execute your database changes.
 ```bash
 python3 manage.py migrate
 ```
-Separate steps let you review the migration before you actually run `migrate`
+
+This bonus step lets you review the migration before you actually run `migrate`
 
 3.  Lets jump into the `Django Interactive Shell` to play with the database for our Cats!
 
@@ -328,12 +333,17 @@ Separate steps let you review the migration before you actually run `migrate`
 
 	```python
 	# main_app/models.py
+	
+	class Cat(models.Model):
 	...
-	def __str__(self):
-	  return self.name
+		def __str__(self):
+		  return self.name
 	```
+	
+	Save your model and restart your Django shell by runing `quit()` in the shell and then `python3 manage.py shell`. Now you should see more detail when you run `Cats.objects.all()`!
 
-4. 	Now lets update our main_app/views.py to use our models! Remember to remove your Cat class definition, we won't need that anymore.
+4. 	Back on track! If you haven't migrated, run `python3 manage.py makemigrations`. 
+Now lets update our main_app/views.py to use our models! Remember to remove your Cat class definition, we won't need that anymore.
 
 	```python
 	# main_app/views.py
