@@ -27,8 +27,8 @@ The pattern of creating a new url in `urls.py`, a new view function in `views.py
 	# main_app/views.py
 	...
 	def show(request, cat_id):
-  	cat = Cat.objects.get(id=cat_id)
-    return render(request, 'show.html', {'cat': cat})
+  		cat = Cat.objects.get(id=cat_id)
+    		return render(request, 'show.html', {'cat': cat})
 	```
 
 	You'll notice that we are searching by id.  Django automatically assigns our models incrementing id numbers to organize our tables.  Thanks Django!  That way we can look up every single cat by their unique `id` given to us.  That `id` will travel with every model so we don't have to worry about assigning them one or trying to maintain it in the back-end!  SO SWEET!
@@ -137,10 +137,10 @@ Let us add the ability to create Cats in our application.  We will now study the
 	from django import forms
 
 	class CatForm(forms.Form):
-	    name = forms.CharField(label='Name', max_length=100)
-	    breed = forms.CharField(label='Breed', max_length=100)
-	    description = forms.CharField(label='Description', max_length=250)
-			age = forms.IntegerField(label='Age')
+	    	name = forms.CharField(label='Name', max_length=100)
+	    	breed = forms.CharField(label='Breed', max_length=100)
+	    	description = forms.CharField(label='Description', max_length=250)
+		age = forms.IntegerField(label='Age')
 	```
 
 2.  Now lets head to `main_app/urls.py` to set up our route to post a new Cat. Lets add a route called `post_url` to listen for a post request:
